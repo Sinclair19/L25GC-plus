@@ -19,7 +19,8 @@ function usage {
     echo "  $0 DPDK_ARGS -- ONVM_ARGS -- NF_ARGS"
     echo ""
     echo "Examples:"
-    echo "  $0 1 -f path/to/upf_u.yaml # Launch UPF-U with service ID 1"
+    echo "  $0 3 -f path/to/upf_u.yaml # Launch UPF-U worker 1"
+    echo "  UPF_U_CORE_ID=15 $0 4 -f path/to/upf_u.yaml # Launch UPF-U worker 2"
     exit 1
 }
 
@@ -35,7 +36,7 @@ DEFAULT_UPF_U_PATH="$WORK_DIR/L25GC-plus/NFs/onvm-upf/build/5gc/l25gc_upf_u"
 
 # Default DPDK args
 DPDK_BASE_ARGS="-n 3 --proc-type=secondary"
-DEFAULT_CORE_ID=3
+DEFAULT_CORE_ID="${UPF_U_CORE_ID:-3}"
 
 # Verify the NF binary exists
 if [ ! -f "$DEFAULT_UPF_U_PATH" ]; then

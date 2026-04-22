@@ -63,26 +63,35 @@ change "MongoDBUrl" from 127.0.0.1 to the ip address of db container
     cd ~/onvm
     ./run_manager.sh
     ```
-2. **Run UPF-U** (new terminal)
+2. **Run UPF-LB** (new terminal)
     ```bash
-    cd ~/onvm/onvm-upf/5gc/upf_u
+    cd ~/onvm/onvm-upf/5gc/upf_lb
     sudo ./go.sh 1
     ```
-3. **Run UPF-C** (new terminal)
+3. **Run UPF-U instance 1** (new terminal)
+    ```bash
+    cd ~/onvm/onvm-upf/5gc/upf_u
+    sudo ./go.sh 3
+    ```
+4. **Run UPF-U instance 2** (new terminal)
+    ```bash
+    cd ~/onvm/onvm-upf/5gc/upf_u
+    sudo ./go.sh 4
+    ```
+5. **Run UPF-C** (new terminal)
     ```bash
     cd ~/onvm/onvm-upf/5gc/upf_c
     sudo ./go.sh 2
     ```
-4. **Run 5GC Network Functions (NFs)** (new terminal)
+6. **Run 5GC Network Functions (NFs)** (new terminal)
 
     ```bash
     cd ~/L25GC-plus
     ./run.sh
     ```
-5. **Stop L25GC+**
+7. **Stop L25GC+**
 
     ```bash
     cd ~/onvm
     ./force_kill.sh
     ```
-

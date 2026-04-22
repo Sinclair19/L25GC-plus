@@ -128,15 +128,17 @@ sudo ip link set <interface> mtu 1518
 Services on the CN node must be started in this order:
 
 1. **ONVM Manager** — wait until port info is printed
-2. **UPF-U** — wait for "NF_READY" message
-3. **UPF-C** — wait for "NF_READY" message
-4. **CP NFs** (`run_cp_nfs.sh`) — wait for "All NFs started"
-5. (Optional) **Webconsole**
+2. **UPF-LB** — wait for "NF_READY" message
+3. **UPF-U instance 1** — wait for "NF_READY" message
+4. **UPF-U instance 2** — wait for "NF_READY" message
+5. **UPF-C** — wait for "NF_READY" message
+6. **CP NFs** (`run_cp_nfs.sh`) — wait for "All NFs started"
+7. (Optional) **Webconsole**
 
 Then on Node1 (UERAN):
 
-6. **gNB** — wait for "NG Setup procedure is successful"
-7. **UE** — wait for "PDU Session establishment successful"
+8. **gNB** — wait for "NG Setup procedure is successful"
+9. **UE** — wait for "PDU Session establishment successful"
 
 Other steps are similar. Please refer to:
 
