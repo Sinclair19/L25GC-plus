@@ -499,10 +499,12 @@ sudo ip route add 10.60.0.1 via 10.147.132.3 dev enp7s0
 Services on the CN node must be started in this order:
 
 1. **ONVM Manager** — wait until port info is printed
-2. **UPF-U** — wait for "NF_READY" message
-3. **UPF-C** — wait for "NF_READY" message
-4. **CP NFs** (`run_cp_nfs.sh`) — wait for "All NFs started"
-5. **Webconsole** - only need to be run once, please refer to [this](https://github.com/nycu-ucr/L25GC-plus/tree/main/docs/fabric_testbed#5-access-the-cn-web-console-from-your-laptop-ssh-tunnel).
+2. **UPF-LB** — wait for "NF_READY" message
+3. **UPF-U instance 1** — wait for "NF_READY" message
+4. **UPF-U instance 2** — wait for "NF_READY" message
+5. **UPF-C** — wait for "NF_READY" message
+6. **CP NFs** (`run_cp_nfs.sh`) — wait for "All NFs started"
+7. **Webconsole** - only need to be run once, please refer to [this](https://github.com/nycu-ucr/L25GC-plus/tree/main/docs/fabric_testbed#5-access-the-cn-web-console-from-your-laptop-ssh-tunnel).
 
 ⚠️ OAI gNB does not support multiple slice rules, please edit and remove rules make subscribers as follow image.
 
