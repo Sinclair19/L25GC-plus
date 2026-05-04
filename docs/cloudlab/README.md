@@ -49,15 +49,23 @@ You can use our provided [scripts](scripts/run/) to launch onvm_mgr and L25GC+ N
     # Run `dpdk-devbind.py -s` to find `N3_IF_PCIE` and `N6_IF_PCIE`
     ./scripts/run/run_onvm_mgr.sh -a "<N3_IF_PCIE> <N6_IF_PCIE>"
     ```
-2. **Run UPF-U** (new terminal)
+2. **Run UPF-LB** (new terminal)
     ```bash
-    ./scripts/run/run_upf_u.sh 1 ./NFs/onvm-upf/5gc/upf_u/config/upf_u.yaml
+    ./scripts/run/run_upf_lb.sh 1 ./NFs/onvm-upf/5gc/upf_lb/config/upf_lb.yaml
     ```
-3. **Run UPF-C** (new terminal)
+3. **Run UPF-U instance 1** (new terminal)
+    ```bash
+    ./scripts/run/run_upf_u.sh 3 ./NFs/onvm-upf/5gc/upf_u/config/upf_u.yaml
+    ```
+4. **Run UPF-U instance 2** (new terminal)
+    ```bash
+    UPF_U_CORE_ID=15 ./scripts/run/run_upf_u.sh 4 ./NFs/onvm-upf/5gc/upf_u/config/upf_u.yaml
+    ```
+5. **Run UPF-C** (new terminal)
     ```bash
     ./scripts/run/run_upf_c.sh 2 ./NFs/onvm-upf/5gc/upf_c/config/upfcfg.yaml
     ```
-4. **Run Control Plane NFs** (new terminal)
+6. **Run Control Plane NFs** (new terminal)
     ```bash
     source ~/.bashrc
     ./scripts/run/run_cp_nfs.sh && reset && tail -f log/*.log
@@ -70,7 +78,7 @@ You can use our provided [scripts](scripts/run/) to launch onvm_mgr and L25GC+ N
     ```bash
     reset
     ```
-5. **Run Webconsole** (new terminal)
+7. **Run Webconsole** (new terminal)
     > The webconsole is used to pre-store UE info in MongoDB for authentication and configure QoS.
     ```bash
     cd webconsole/ 
@@ -78,7 +86,7 @@ You can use our provided [scripts](scripts/run/) to launch onvm_mgr and L25GC+ N
     ```
     See this [video]() or [doc](../../docs/webconsole/README.md) for usage instructions.
 
-6. **Stop L25GC+**
+8. **Stop L25GC+**
     ```bash
     ./scripts/run/stop_cn.sh
     ```
