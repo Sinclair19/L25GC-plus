@@ -7,7 +7,7 @@ This tutorial provides a deployment-focused, end-to-end guide to running L25GC+ 
 ---
 
 ### Topology Setup
-The experimental testbed consists of a UE/RAN node, a Core Network (CN) node, and a Data Network (DN) node, connected through three separate subnets. `subnet-1` is used for the N2 interface between the UE/RAN and the control-plane NFs in the 5G core. `subnet-2` is used for the N3 interface between the UE/RAN and the UPF-U. `subnet-3` is used for the N6 interface between the UPF-U and the DN.
+The experimental testbed consists of a UE/RAN node, a Core Network (CN) node, and a Data Network (DN) node, connected through three separate subnets. `subnet-1` is used for the N2 interface between the UE/RAN and the control-plane NFs in the 5G core. `subnet-2` is used for the N3 interface between the UE/RAN and the UPF-LB on the CN node. The UPF-LB then steers packets to the UPF-U worker that owns the session. `subnet-3` is used for the N6 interface between the UPF-U workers and the DN.
 
 ![FABRIC Topology](./tutorial-topo.png)
 
@@ -27,7 +27,7 @@ The artifact helps you:
 - provision the nodes and configure their network interfaces automatically;
 - assign IP addresses and set up the routing needed by the experiment;
 - install the required software stack on each node;
-- configure key L25GC+ components, including AMF, SMF, and UPF-U, using the generated network settings;
+- configure key L25GC+ components, including AMF, SMF, UPF-LB, and UPF-U workers, using the generated network settings;
 - configure UERANSIM and OAI-based UE/RAN components for PDU session establishment, handover, and end-to-end traffic experiments.
 
 Please complete the artifact setup first, then continue with the rest of the tutorial steps on your own FABRIC cluster.
@@ -155,14 +155,16 @@ For each step, we will clearly state how many terminals you need. Please pay clo
 
 #### (1) Log in to the Core Network node and start L25GC+
 
-Open **four new terminals** and SSH into your **Core Network (CN) node** in all of them.
+Open **six new terminals** and SSH into your **Core Network (CN) node** in all of them.
 
-In this step, you will use these four terminals to start the main L25GC+ components on the CN node:
+In this step, you will use these six terminals to start the main L25GC+ components on the CN node:
 
 - **Terminal 1:** ONVM Manager
-- **Terminal 2:** UPF-U
-- **Terminal 3:** UPF-C
-- **Terminal 4:** Remaining control-plane NFs
+- **Terminal 2:** UPF-LB
+- **Terminal 3:** UPF-U worker 1
+- **Terminal 4:** UPF-U worker 2
+- **Terminal 5:** UPF-C
+- **Terminal 6:** Remaining control-plane NFs
 
 Before starting the ONVM Manager, you need to identify the PCIe addresses of the **N3** and **N6** interfaces on your **CN node**.
 
@@ -315,7 +317,8 @@ In this step, you need to start L25GC+ on the **CN node** again.
 The procedure is the same as **[Step-2 (1)](#1-log-in-to-the-core-network-node-and-start-l25gc)**:
 - open the required terminals on the **CN node**,
 - start the **ONVM Manager**,
-- start **UPF-U**,
+- start **UPF-LB**,
+- start the **UPF-U workers**,
 - start **UPF-C**,
 - and then start the remaining **control-plane NFs**.
 

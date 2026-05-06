@@ -15,11 +15,11 @@ fi
 # Usage information
 function usage {
     echo "Usage:"
-    echo "  $0 SERVICE-ID -f UPF-C-CONFIG [remaining NF args]"
+    echo "  $0 SERVICE-ID UPF-C-CONFIG [remaining NF args]"
     echo "  $0 DPDK_ARGS -- ONVM_ARGS -- NF_ARGS"
     echo ""
     echo "Examples:"
-    echo "  $0 2 -f path/to/upfcfg.yaml # Launch UPF-C with service ID 2"
+    echo "  $0 2 path/to/upfcfg.yaml # Launch UPF-C with service ID 2"
     exit 1
 }
 
