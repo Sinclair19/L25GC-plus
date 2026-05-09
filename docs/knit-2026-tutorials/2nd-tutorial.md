@@ -202,13 +202,13 @@ Replace `N3_IF_PCIE` and `N6_IF_PCIE` in the ONVM Manager command below with the
 3. **Terminal 3: Run UPF-U instance 1**
     ```bash
     cd ~/L25GC-plus/
-    ./scripts/run/run_upf_u.sh 3 ./NFs/onvm-upf/5gc/upf_u/config/upf_u.yaml
+    ./scripts/run/run_upf_u.sh 14 ./NFs/onvm-upf/5gc/upf_u/config/upf_u.yaml
     ```
 
 4. **Terminal 4: Run UPF-U instance 2**
     ```bash
     cd ~/L25GC-plus/
-    UPF_U_CORE_ID=15 ./scripts/run/run_upf_u.sh 4 ./NFs/onvm-upf/5gc/upf_u/config/upf_u.yaml
+    UPF_U_CORE_ID=15 ./scripts/run/run_upf_u.sh 15 ./NFs/onvm-upf/5gc/upf_u/config/upf_u.yaml
     ```
 
 5. **Terminal 5: Run UPF-C**
