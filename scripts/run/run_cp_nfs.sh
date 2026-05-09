@@ -1,5 +1,30 @@
 #!/usr/bin/env bash
 
+ensure_mongodb() {
+    if mongosh --quiet --eval 'db.runCommand({ ping: 1 }).ok' >/dev/null 2>&1; then
+        return
+    fi
+
+    echo "MongoDB is not reachable; starting mongod..."
+    if command -v systemctl >/dev/null 2>&1; then
+        sudo systemctl start mongod
+    else
+        echo "ERROR: systemctl is not available; please start MongoDB before running CP NFs." >&2
+        exit 1
+    fi
+
+    for _ in $(seq 1 20); do
+        if mongosh --quiet --eval 'db.runCommand({ ping: 1 }).ok' >/dev/null 2>&1; then
+            echo "MongoDB is ready."
+            return
+        fi
+        sleep 1
+    done
+
+    echo "ERROR: MongoDB did not become ready after starting mongod." >&2
+    exit 1
+}
+
 run_nf() {
     local name=$1
     local core=$2
@@ -9,6 +34,7 @@ run_nf() {
 }
 
 mkdir -p log
+ensure_mongodb
 
 run_nf nrf 5
 run_nf amf 6
