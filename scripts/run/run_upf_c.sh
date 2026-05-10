@@ -88,4 +88,9 @@ fi
 
 # --- Final launch ---
 # shellcheck disable=SC2086 to allow unquoted expansion
-exec sudo "$DEFAULT_UPF_C_PATH" $DPDK_ARGS -- $ONVM_ARGS -- -f "$@"
+ENV_ARGS=()
+if [ -n "${UPF_PCAP_REPLAY_TEID:-}" ]; then
+    ENV_ARGS+=(UPF_PCAP_REPLAY_TEID="$UPF_PCAP_REPLAY_TEID")
+fi
+
+exec sudo env "${ENV_ARGS[@]}" "$DEFAULT_UPF_C_PATH" $DPDK_ARGS -- $ONVM_ARGS -- -f "$@"
