@@ -89,4 +89,9 @@ fi
 
 # --- Final launch ---
 # shellcheck disable=SC2086 to allow unquoted expansion
-exec sudo "$DEFAULT_UPF_LB_PATH" $DPDK_ARGS -- $ONVM_ARGS -- "$@"
+ENV_ARGS=()
+if [ -n "${UPF_LB_BENCH_DROP:-}" ]; then
+    ENV_ARGS+=(UPF_LB_BENCH_DROP="$UPF_LB_BENCH_DROP")
+fi
+
+exec sudo env "${ENV_ARGS[@]}" "$DEFAULT_UPF_LB_PATH" $DPDK_ARGS -- $ONVM_ARGS -- "$@"
