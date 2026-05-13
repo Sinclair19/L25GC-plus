@@ -25,6 +25,9 @@ submodule pointer.
   and classifier snapshot rebuilds.
 - `NFs/onvm-upf/5gc/upf_u/upf_u.c` classifies packets against snapshots and applies
   PDR/FAR behavior.
+  - UE token-bucket policing must stay non-blocking on the DPDK/ONVM packet
+    path. If a UE bucket lacks credit, UPF-U drops the packet instead of sleeping
+    and stalling the worker lcore.
 - `NFs/onvm-upf/5gc/upf_lb/upf_lb.c` selects UPF-U workers using TEID/UE-IP session
   maps.
   - `UPF_LB_BENCH_DROP=1` enables pure LB benchmark mode: LB parses/selects a
